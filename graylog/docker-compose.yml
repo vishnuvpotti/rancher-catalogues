@@ -1,0 +1,22 @@
+version: '2'
+services:
+  some-mongo:
+    image: "mongo:3"
+  some-elasticsearch:
+    image: "elasticsearch"
+    command: "elasticsearch -Ecluster.name='graylog'"
+  graylog:
+    image: graylog/graylog
+    environment:
+      GRAYLOG_PASSWORD_SECRET: somepasswordpepper
+      GRAYLOG_ROOT_PASSWORD_SHA2: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+      GRAYLOG_WEB_ENDPOINT_URI: http://[ElasticHostIP]:9000/api
+      GRAYLOG_ELASTICSEARCH_HOSTS: http://some-elasticsearch:9200
+    links:
+      - some-mongo:mongo
+      - some-elasticsearch:elasticsearch
+    ports:
+      - "9000:9000"
+      - "7990:7990/udp"	
+      - "7990:7990"
+      - "5000:5000/udp"
