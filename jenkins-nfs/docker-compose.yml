@@ -1,0 +1,10 @@
+version: '2'
+services:
+  foo:
+    image: jenkins/jenkins:lts
+    stdin_open: true
+    volumes:
+    - jenkinsdata:/data
+volumes:
+  jenkinsdata:
+    driver: rancher-nfs
