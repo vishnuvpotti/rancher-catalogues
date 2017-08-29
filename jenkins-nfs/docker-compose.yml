@@ -1,6 +1,6 @@
 version: '2'
 services:
-  foo:
+  Jenkins-Stack:
     image: jenkins/jenkins:lts
     stdin_open: true
     volumes:
