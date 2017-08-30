@@ -28,7 +28,7 @@ Click on launch button.
 
 6) Now proceed to Stack menu and create a stack.
  
-I will be creating a Jenkins stack using docker-compoe.yml and rancher-compose.yml in this repository
+I will be creating a Jenkins stack using docker-compose.yml and rancher-compose.yml in this repository
 
 7) You may see an error like 
 Expected state running but got error: Error response from daemon: VolumeDriver.Mount: Failed nsenter -t 5239 -n mount -o ,nfsvers=4 10.0.x.x://xxx /var/lib/rancher/volumes/rancher-nfs/xxx
