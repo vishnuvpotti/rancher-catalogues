@@ -1,10 +1,21 @@
 version: '2'
+volumes:
+  jenkins-var-jenkins:
+    driver: rancher-nfs
+  jenkins-etc-ssl-certs:
+    driver: rancher-nfs
 services:
-  Jenkins-Stack:
-    image: jenkins/jenkins:lts
+  Jenkins:
+    image: jenkins:2.60.2
     stdin_open: true
     volumes:
-    - jenkinsdata:/data
-volumes:
-  jenkinsdata:
-    driver: rancher-nfs
+    - jenkins-var-jenkins:/var/jenkins_home
+    - jenkins-etc-ssl-certs:/etc/ssl/certs
+    tty: true
+  Jenkins-LB:
+    image: rancher/lb-service-haproxy:v0.7.5
+    ports:
+    - 8080:8080/tcp
+    labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
